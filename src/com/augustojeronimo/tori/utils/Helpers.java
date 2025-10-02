@@ -9,7 +9,7 @@ public class Helpers
   private Helpers() {}
 
 
-  public static Dimension get_screen_size()
+  public static Dimension getScreenSize()
   {
     return Toolkit.getDefaultToolkit().getScreenSize();
   }
