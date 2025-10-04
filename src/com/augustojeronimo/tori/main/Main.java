@@ -9,11 +9,19 @@ public class Main
 {
   public static void main(String[] args)
   {
-    javax.swing.SwingUtilities.invokeLater(() -> {
-
-        GameFrame g = new GameFrame();
-        GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(g);
-    });
+    // javax.swing.SwingUtilities.invokeLater(() -> {
+      GameFrame g = GameFrame.getInstance();
+      GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(g);
+    // });
+    
+    while (true) {
+      try {
+        g.getInstance().tick();
+        Thread.sleep(1000/60);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+    }
   }
 
 }

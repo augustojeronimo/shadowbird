@@ -1,5 +1,8 @@
 package com.augustojeronimo.tori.views;
 
+import com.augustojeronimo.tori.input.InputManager;
+import com.augustojeronimo.tori.input.KeyboardInput;
+
 import java.awt.Canvas;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,16 +11,23 @@ import java.util.List;
 
 public abstract class BaseView extends Canvas
 {
-  
+
   private static final List<BaseView> list = new ArrayList<>();
   private final ViewType type;
 
-  // TO DO: input (keyhandler)
+  private static BaseView activeView;
+  protected final InputManager inputManager = new InputManager();
 
   protected BaseView(ViewType type)
   {
     this.type = type;
+    addView();
 
+    setFocusable(true);
+    addKeyListener(KeyboardInput.getInstance());
+  }
+
+  private void addView() {
     if (! list.contains(this)) {
       list.add(this);
 
@@ -56,8 +66,9 @@ public abstract class BaseView extends Canvas
   {
     for (BaseView view : list) {
       if (view.type == type) {
-        view.setVisible(true);
-        view.requestFocus();
+        activeView = view;
+        activeView.setVisible(true);
+        activeView.requestFocus();
       }
       else {
         view.setVisible(false);
@@ -65,4 +76,10 @@ public abstract class BaseView extends Canvas
     }
   }
 
+  public void tick()
+  {
+    if (activeView.equals(this)) {
+      inputManager.tick();
+    }
+  }
 }

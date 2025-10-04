@@ -1,5 +1,6 @@
 package com.augustojeronimo.tori.window;
 
+import com.augustojeronimo.tori.views.Menu;
 import javax.swing.WindowConstants;
 import javax.swing.JFrame;
 import java.awt.Color;
@@ -7,13 +8,21 @@ import java.awt.Color;
 
 public class GameFrame extends JFrame
 {
-  public MainPanel panel;
+  private static GameFrame instance;
 
-  public GameFrame()
+  private GameFrame()
   {
     configure();
     
     this.setVisible(true);
+  }
+
+  public static GameFrame getInstance()
+  {
+    if (instance == null) {
+      instance = new GameFrame();
+    }
+    return instance;
   }
 
   private void configure()
@@ -28,5 +37,10 @@ public class GameFrame extends JFrame
 
     this.setLayout(null);
     this.add(MainPanel.getInstance());
+  }
+
+  public static void tick()
+  {
+      Menu.getInstance().tick();
   }
 }
