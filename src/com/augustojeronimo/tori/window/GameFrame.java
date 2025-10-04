@@ -1,14 +1,19 @@
 package com.augustojeronimo.tori.window;
 
-import com.augustojeronimo.tori.views.Menu;
+import com.augustojeronimo.tori.core.GameThread;
+import com.augustojeronimo.tori.views.BaseView;
+
 import javax.swing.WindowConstants;
 import javax.swing.JFrame;
 import java.awt.Color;
+import java.awt.GraphicsEnvironment;
 
 
 public class GameFrame extends JFrame
 {
   private static GameFrame instance;
+
+  private boolean fullscreen = false;
 
   private GameFrame()
   {
@@ -37,10 +42,36 @@ public class GameFrame extends JFrame
 
     this.setLayout(null);
     this.add(MainPanel.getInstance());
+
+    toggleFullscreen();
+  }
+
+  public void toggleFullscreen()
+  {
+    if (! fullscreen) {
+      GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(this);
+      fullscreen = true;
+    }
+    else {
+      GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(null);
+      this.setVisible(true);
+      fullscreen = false;
+    }
+  }
+
+  public void close()
+  {
+    GameThread.getInstance().stop();
+    System.exit(0);
   }
 
   public static void tick()
   {
-      Menu.getInstance().tick();
+      BaseView active = BaseView.getActiveView();
+
+      if (active != null) {
+        active.tick();
+        active.repaint();
+      }
   }
 }

@@ -1,6 +1,6 @@
 package com.augustojeronimo.tori.views;
 
-import java.awt.Color;
+import java.awt.Graphics;
 
 
 public class Menu extends BaseView
@@ -23,9 +23,25 @@ public class Menu extends BaseView
     return instance;
   }
 
+  @Override
+  protected void setDefaultKeyActions()
+  {
+    super.setDefaultKeyActions();
+    
+    // TO DO: Add Menu keyActions
+  }
+
+  @Override
+  public void paint(Graphics g)
+  {
+    super.paint(g);
+    
+    // TO DO: Render components
+    //Renderer.render(g, SpriteLoader.getImage("path/menu_background.png"), 0, 0, getWidth(), getHeight());
+  }
+
   private void configure()
   {
-    setBackground(Color.RED.darker());
-    // TO DO: configure background image and buttons (need archive read code)
+    // TO DO: Configure elements
   }
 }

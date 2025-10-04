@@ -25,6 +25,14 @@ public abstract class BaseView extends Canvas
 
     setFocusable(true);
     addKeyListener(KeyboardInput.getInstance());
+
+    setDefaultKeyActions();
+  }
+
+  @Override
+  public void removeNotify() {
+    super.removeNotify();
+    removeView(this);
   }
 
   private void addView() {
@@ -45,21 +53,9 @@ public abstract class BaseView extends Canvas
     return Collections.unmodifiableList(list);
   }
 
-  @Override
-  public void removeNotify() {
-    super.removeNotify();
-    removeView(this);
-  }
-
-  public static BaseView getView(ViewType type)
+  public static BaseView getActiveView()
   {
-    for (BaseView view : list) {
-      if (view.type == type) {
-        return view;
-      }
-    }
-
-    return null;
+    return activeView;
   }
 
   public static void switchView(ViewType type)
@@ -81,5 +77,10 @@ public abstract class BaseView extends Canvas
     if (activeView.equals(this)) {
       inputManager.tick();
     }
+  }
+
+  protected void setDefaultKeyActions()
+  {
+    // TO DO: Global KeyActions
   }
 }

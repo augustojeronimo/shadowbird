@@ -1,6 +1,6 @@
 package com.augustojeronimo.tori.views;
 
-import java.awt.Color;
+import java.awt.Graphics;
 
 
 public class Settings extends BaseView
@@ -23,9 +23,25 @@ public class Settings extends BaseView
     return instance;
   }
 
+  @Override
+  protected void setDefaultKeyActions()
+  {
+    super.setDefaultKeyActions();
+
+    // TO DO: Add Settings KeyActions
+  }
+
+  @Override
+  public void paint(Graphics g)
+  {
+    super.paint(g);
+    
+    // TO DO: Render components
+    //Renderer.render(g, SpriteLoader.getImage("path/settings_background.png"), 0, 0, getWidth(), getHeight());
+  }
+
   private void configure()
   {
-    setBackground(Color.BLUE.darker());
-    // TO DO: configure background image and buttons (need archive read code)
+    // TO DO: configure elements
   }
 }

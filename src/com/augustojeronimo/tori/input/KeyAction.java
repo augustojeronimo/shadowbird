@@ -1,17 +1,16 @@
 package com.augustojeronimo.tori.input;
 
-import javax.swing.JOptionPane;
 
 public class KeyAction
 {
   private final boolean holdable;
   private final Runnable action;
-  private final int keyCode;
+  private final int[] keyCode;
 
   private boolean wasPressed;
 
 
-  public KeyAction(int keyCode, Runnable action, boolean holdable)
+  public KeyAction(Runnable action, boolean holdable, int... keyCode)
   {
     this.keyCode = keyCode;
     this.action = action;
@@ -22,7 +21,10 @@ public class KeyAction
 
   public boolean active()
   {
-    return KeyboardInput.isKeyPressed(keyCode);
+    for (int key : keyCode) {
+      if (! KeyboardInput.isKeyPressed(key)) return false;
+    }
+    return true;
   }
 
   public void tick()

@@ -3,6 +3,7 @@ package com.augustojeronimo.tori.core;
 import com.augustojeronimo.tori.constants.Constants;
 import com.augustojeronimo.tori.window.GameFrame;
 
+
 public final class GameThread implements Runnable
 {
   private static final GameThread instance = new GameThread();
@@ -20,6 +21,7 @@ public final class GameThread implements Runnable
   public void start()
   {
     if (loop == null || ! loop.isAlive()) {
+      running = true;
       loop = new Thread(this, "GameLoopThread");
       loop.start();
     }
@@ -29,11 +31,7 @@ public final class GameThread implements Runnable
   {
     running = false;
     if (loop != null) {
-      try {
-        loop.join();
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      }
+      loop.interrupt();
       loop = null;
     }
   }
@@ -41,8 +39,6 @@ public final class GameThread implements Runnable
   @Override
   public void run()
   {
-    running = true;
-
     final double frameInterval = 1_000_000_000L / Constants.FPS;
     long nextFrame = System.nanoTime();
 
