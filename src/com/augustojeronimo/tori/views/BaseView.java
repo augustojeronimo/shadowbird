@@ -1,15 +1,15 @@
 package com.augustojeronimo.tori.views;
 
+import com.augustojeronimo.tori.graphics.UIElement;
 import com.augustojeronimo.tori.input.InputManager;
 import com.augustojeronimo.tori.input.KeyboardInput;
 
-import java.awt.Canvas;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 
-public abstract class BaseView extends Canvas
+public abstract class BaseView extends UIElement
 {
 
   private static final List<BaseView> list = new ArrayList<>();
@@ -25,8 +25,6 @@ public abstract class BaseView extends Canvas
 
     setFocusable(true);
     addKeyListener(KeyboardInput.getInstance());
-
-    setDefaultKeyActions();
   }
 
   @Override
@@ -45,7 +43,7 @@ public abstract class BaseView extends Canvas
     }
   }
 
-  public static void removeView(BaseView view) {
+  private void removeView(BaseView view) {
     list.remove(view);
   }
 
@@ -63,13 +61,13 @@ public abstract class BaseView extends Canvas
     for (BaseView view : list) {
       if (view.type == type) {
         activeView = view;
-        activeView.setVisible(true);
-        activeView.requestFocus();
       }
       else {
         view.setVisible(false);
       }
     }
+    activeView.setVisible(true);
+    activeView.requestFocus();
   }
 
   public void tick()

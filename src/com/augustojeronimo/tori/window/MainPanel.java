@@ -2,8 +2,7 @@ package com.augustojeronimo.tori.window;
 
 import com.augustojeronimo.tori.constants.Constants;
 import com.augustojeronimo.tori.utils.Helpers;
-import com.augustojeronimo.tori.views.Menu;
-import com.augustojeronimo.tori.views.Settings;
+import com.augustojeronimo.tori.views.menu.Menu;
 
 import javax.swing.JPanel;
 import java.awt.CardLayout;
@@ -13,6 +12,8 @@ import java.awt.Color;
 public class MainPanel extends JPanel
 {
   private static MainPanel instance;
+  private int offsetX, offsetY;
+  private double scaleX, scaleY;
 
   private MainPanel()
   {
@@ -35,6 +36,8 @@ public class MainPanel extends JPanel
     this.setBackground(Color.DARK_GRAY);
     this.setDoubleBuffered(true);
     this.position16by9();
+
+    setScaleRender();
   }
 
   private void position16by9() {
@@ -51,15 +54,40 @@ public class MainPanel extends JPanel
         panel_width = (int) (panel_height * aspect);
     }
 
-    int offset_x = (screen_width - panel_width) / 2;
-    int offset_y = (screen_height - panel_height) / 2;
+    offsetX = (screen_width - panel_width) / 2;
+    offsetY = (screen_height - panel_height) / 2;
 
-    this.setBounds(offset_x, offset_y, panel_width, panel_height);
+    this.setBounds(offsetX, offsetY, panel_width, panel_height);
+  }
+
+  public int getOffsetX()
+  {
+    return this.offsetX;
+  }
+
+  public int getOffsetY()
+  {
+    return this.offsetY;
+  }
+
+  public void setScaleRender()
+  {
+    this.scaleX = getWidth() / Constants.BASE_WIDTH;
+    this.scaleY = getHeight() / Constants.BASE_HEIGHT;
+  }
+
+  public double getScaleX()
+  {
+    return scaleX;
+  }
+
+  public double getScaleY()
+  {
+    return scaleY;
   }
 
   private void setViews()
   {
     add(Menu.getInstance());
-    add(Settings.getInstance());
   }
 }
