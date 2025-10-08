@@ -2,10 +2,7 @@ package com.augustojeronimo.tori.views;
 
 import com.augustojeronimo.tori.graphics.UIElement;
 import com.augustojeronimo.tori.input.InputManager;
-import com.augustojeronimo.tori.input.KeyAction;
 import com.augustojeronimo.tori.input.KeyboardInput;
-import com.augustojeronimo.tori.window.GameFrame;
-import java.awt.event.KeyEvent;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -46,7 +43,7 @@ public abstract class BaseView extends UIElement
     }
   }
 
-  public static void removeView(BaseView view) {
+  private void removeView(BaseView view) {
     list.remove(view);
   }
 
@@ -64,13 +61,13 @@ public abstract class BaseView extends UIElement
     for (BaseView view : list) {
       if (view.type == type) {
         activeView = view;
-        activeView.setVisible(true);
-        activeView.requestFocus();
       }
       else {
         view.setVisible(false);
       }
     }
+    activeView.setVisible(true);
+    activeView.requestFocus();
   }
 
   public void tick()
