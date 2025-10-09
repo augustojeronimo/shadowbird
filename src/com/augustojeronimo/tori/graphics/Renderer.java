@@ -12,4 +12,10 @@ public class Renderer
     if (graphics == null || sprite == null) return;
     graphics.drawImage(sprite, x, y, width, height, null);
   }
+
+  public static void renderScaled(Graphics graphics, BufferedImage sprite, UIElement element)
+  {
+    if (graphics == null || sprite == null) return;
+    graphics.drawImage(sprite, element.getScaledX(), element.getScaledY(), element.getScaledWidth(), element.getScaledHeight(), null);
+  }
 }

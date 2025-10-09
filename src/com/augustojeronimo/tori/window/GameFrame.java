@@ -33,6 +33,8 @@ public class GameFrame
 
     frame.setVisible(true);
     toggleFullscreen();
+
+    GameThread.getInstance().start();
   }
 
   public static JFrame getInstance()

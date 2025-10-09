@@ -37,6 +37,6 @@ public final class MenuButton extends UIElement
       case CLOSE -> Assets.Menu.buttonClose(active);
     };
 
-    Renderer.render(g, sprite,getScaledX(), getScaledY(), getScaledWidth(), getScaledHeight());
+    Renderer.renderScaled(g, sprite, this);
   }
 }

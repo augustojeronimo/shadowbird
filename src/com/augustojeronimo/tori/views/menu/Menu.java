@@ -83,7 +83,7 @@ public final class Menu extends BaseView
   @Override
   public void paint(Graphics g)
   {
-    Renderer.render(g, Assets.Menu.background(), getScaledX(), getScaledY(), getScaledWidth(), getScaledHeight());
-    buttons.forEach((btn) -> { btn.paint(g); });
+    Renderer.renderScaled(g, Assets.Menu.background(), this);
+    buttons.forEach((btn) -> btn.paint(g));
   }
 }

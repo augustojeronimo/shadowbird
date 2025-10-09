@@ -16,7 +16,7 @@ public final class Assets
     
     public static BufferedImage background()
     {
-      return SpriteLoader.getImage(BASE_DIR+"background"+EXTENSION);
+      return SpriteLoader.getImage(BASE_DIR+"background_16x9"+EXTENSION);
     }
 
     public static BufferedImage title()
