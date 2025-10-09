@@ -9,7 +9,7 @@ public class Main
   public static void main(String[] args)
   {
     javax.swing.SwingUtilities.invokeLater(() -> {
-      GameFrame g = GameFrame.getInstance();
+      GameFrame.init();
     });
 
     GameThread loop = GameThread.getInstance();

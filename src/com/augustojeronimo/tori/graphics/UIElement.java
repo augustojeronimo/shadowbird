@@ -3,16 +3,17 @@ package com.augustojeronimo.tori.graphics;
 import com.augustojeronimo.tori.window.MainPanel;
 import java.awt.Canvas;
 
+
 public class UIElement extends Canvas
 {
   public int getScaledX()
   {
-    return (int) (getX() * MainPanel.getInstance().getScaleX() + MainPanel.getInstance().getOffsetX());
+    return (int) (getX() * MainPanel.getInstance().getScaleX());
   }
 
   public int getScaledY()
   {
-    return (int) (getY() * MainPanel.getInstance().getScaleY() + MainPanel.getInstance().getOffsetY());
+    return (int) (getY() * MainPanel.getInstance().getScaleY());
   }
 
   public int getScaledWidth()

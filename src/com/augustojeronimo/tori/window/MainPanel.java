@@ -1,7 +1,6 @@
 package com.augustojeronimo.tori.window;
 
 import com.augustojeronimo.tori.constants.Constants;
-import com.augustojeronimo.tori.utils.Helpers;
 import com.augustojeronimo.tori.views.menu.Menu;
 
 import javax.swing.JPanel;
@@ -35,14 +34,11 @@ public class MainPanel extends JPanel
     this.setLayout(new CardLayout());
     this.setBackground(Color.DARK_GRAY);
     this.setDoubleBuffered(true);
-    this.position16by9();
-
-    setScaleRender();
   }
 
   private void position16by9() {
-    int screen_width = (int) Helpers.getScreenSize().getWidth();
-    int screen_height = (int) Helpers.getScreenSize().getHeight();
+    int screen_width = (int) GameFrame.getInstance().getWidth();
+    int screen_height = (int) GameFrame.getInstance().getHeight();
 
     double aspect = Constants.ASPECT_RATIO;
 
@@ -89,5 +85,11 @@ public class MainPanel extends JPanel
   private void setViews()
   {
     add(Menu.getInstance());
+  }
+
+  public static void tick()
+  {
+    MainPanel.getInstance().position16by9();
+    MainPanel.getInstance().setScaleRender();
   }
 }

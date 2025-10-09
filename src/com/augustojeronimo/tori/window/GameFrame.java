@@ -6,60 +6,58 @@ import com.augustojeronimo.tori.views.BaseView;
 import javax.swing.WindowConstants;
 import javax.swing.JFrame;
 import java.awt.Color;
+import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 
 
-public class GameFrame extends JFrame
+public class GameFrame
 {
-  private static GameFrame instance;
+  private static JFrame frame;
+  private static boolean fullscreen = false;
 
-  private boolean fullscreen = false;
+  private GameFrame() {}
 
-  private GameFrame()
+  public static void init()
   {
-    configure();
-    
-    this.setVisible(true);
-  }
+    if (frame != null) return;
 
-  public static GameFrame getInstance()
-  {
-    if (instance == null) {
-      instance = new GameFrame();
-    }
-    return instance;
-  }
+    frame = new JFrame("Kage no Tori");
+    frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    frame.setUndecorated(true);
+    frame.setResizable(false);
+    frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+    frame.getContentPane().setBackground(Color.BLACK);
+    frame.setLayout(null);
 
-  private void configure()
-  {
-    this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    this.setUndecorated(true);
-    this.setResizable(false);
-    this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-    this.getContentPane().setBackground(Color.BLACK);
-    
-    this.setTitle("Kage no Tori");
+    frame.add(MainPanel.getInstance());
 
-    this.setLayout(null);
-    this.add(MainPanel.getInstance());
-
+    frame.setVisible(true);
     toggleFullscreen();
   }
 
-  public void toggleFullscreen()
+  public static JFrame getInstance()
   {
+    if (frame == null) throw new IllegalStateException("Uninitialized frame");
+    return frame;
+  }
+
+  public static void toggleFullscreen()
+  {
+    if (frame == null) return;
+
+    GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+    
     if (! fullscreen) {
-      GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(this);
+      device.setFullScreenWindow(frame);
       fullscreen = true;
     }
     else {
-      GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(null);
-      this.setVisible(true);
+      device.setFullScreenWindow(null);
       fullscreen = false;
     }
   }
 
-  public void close()
+  public static void close()
   {
     GameThread.getInstance().stop();
     System.exit(0);
@@ -67,11 +65,14 @@ public class GameFrame extends JFrame
 
   public static void tick()
   {
-      BaseView active = BaseView.getActiveView();
+    if (frame == null) return;
 
-      if (active != null) {
-        active.tick();
-        active.repaint();
-      }
+    MainPanel.tick();
+    BaseView active = BaseView.getActiveView();
+
+    if (active != null) {
+      active.tick();
+      active.repaint();
+    }
   }
 }

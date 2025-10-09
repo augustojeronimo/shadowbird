@@ -16,7 +16,7 @@ public final class Actions
 
     public static void closeGame()
     {
-      GameFrame.getInstance().close();
+      GameFrame.close();
     }
   }
 
@@ -48,7 +48,7 @@ public final class Actions
 
     public static void closeGame()
     {
-      GameFrame.getInstance().close();
+      GameFrame.close();
     }
   }
 }

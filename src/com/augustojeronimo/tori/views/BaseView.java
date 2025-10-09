@@ -1,8 +1,12 @@
 package com.augustojeronimo.tori.views;
 
+import com.augustojeronimo.tori.constants.Constants;
 import com.augustojeronimo.tori.graphics.UIElement;
 import com.augustojeronimo.tori.input.InputManager;
+import com.augustojeronimo.tori.input.KeyAction;
 import com.augustojeronimo.tori.input.KeyboardInput;
+import com.augustojeronimo.tori.window.GameFrame;
+import java.awt.event.KeyEvent;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -73,6 +77,7 @@ public abstract class BaseView extends UIElement
   public void tick()
   {
     if (activeView.equals(this)) {
+      activeView.setBounds(0, 0, (int) Constants.BASE_WIDTH, (int) Constants.BASE_HEIGHT);
       inputManager.tick();
     }
   }
@@ -80,5 +85,8 @@ public abstract class BaseView extends UIElement
   protected void setDefaultKeyActions()
   {
     // TO DO: Global KeyActions
+    inputManager.addKeyAction(new KeyAction(() -> {
+      GameFrame.toggleFullscreen();
+    }, false, KeyEvent.VK_F));
   }
 }
