@@ -43,6 +43,7 @@ public final class GameThread implements Runnable
     long nextFrame = System.nanoTime();
 
     while (running) {
+      GameClock.tick();
       GameFrame.tick();
 
       nextFrame += frameInterval;
