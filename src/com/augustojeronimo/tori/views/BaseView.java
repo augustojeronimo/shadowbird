@@ -62,14 +62,14 @@ public abstract class BaseView extends UIElement
 
   public static void switchView(ViewType type)
   {
+    BaseView older = activeView;
+
     for (BaseView view : list) {
       if (view.type == type) {
         activeView = view;
       }
-      else {
-        view.setVisible(false);
-      }
     }
+    if (older != null && !older.equals(activeView)) older.setVisible(false);
     activeView.setVisible(true);
     activeView.requestFocus();
   }
@@ -89,4 +89,6 @@ public abstract class BaseView extends UIElement
       GameFrame.toggleFullscreen();
     }, false, KeyEvent.VK_F));
   }
+
+  protected void gainFocus() {}
 }

@@ -16,7 +16,7 @@ public final class Assets
     
     public static BufferedImage background()
     {
-      return SpriteLoader.getImage(BASE_DIR+"background_16x9"+EXTENSION);
+      return SpriteLoader.getImage(BASE_DIR+"background"+EXTENSION);
     }
 
     public static BufferedImage title()
@@ -26,20 +26,43 @@ public final class Assets
 
     public static BufferedImage buttonStart(boolean active)
     {
-      String version = active ? "button_start_active" : "button_start";
-      return SpriteLoader.getImage(BASE_DIR+version+EXTENSION);
+      String sprite = "button_start" + (active ? "_active" : "");
+      return SpriteLoader.getImage(BASE_DIR+sprite+EXTENSION);
     }
 
     public static BufferedImage buttonSettings(boolean active)
     {
-      String version = active ? "button_settings_active" : "button_settings";
-      return SpriteLoader.getImage(BASE_DIR+version+EXTENSION);
+      String sprite = "button_settings" + (active ? "_active" : "");
+      return SpriteLoader.getImage(BASE_DIR+sprite+EXTENSION);
     }
 
     public static BufferedImage buttonClose(boolean active)
     {
-      String version = active ? "button_close_active" : "button_close";
-      return SpriteLoader.getImage(BASE_DIR+version+EXTENSION);
+      String sprite = "button_close" + (active ? "_active" : "");
+      return SpriteLoader.getImage(BASE_DIR+sprite+EXTENSION);
+    }
+  }
+
+
+  public final class SaveSelect
+  {
+    private static final String BASE_DIR = "sprite/save_select/";
+
+    public static BufferedImage background()
+    {
+      return SpriteLoader.getImage(BASE_DIR+"background"+EXTENSION);
+    }
+
+    public static BufferedImage emptySlot(boolean active)
+    {
+      String sprite = "slot_empty" + (active ? "_active" : "");
+      return SpriteLoader.getImage(BASE_DIR+sprite+EXTENSION);
+    }
+
+    public static BufferedImage dataSlot(boolean active)
+    {
+      String sprite = "slot_data" + (active ? "_active" : "");
+      return SpriteLoader.getImage(BASE_DIR+sprite+EXTENSION);
     }
   }
   

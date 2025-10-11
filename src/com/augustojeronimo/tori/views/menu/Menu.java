@@ -39,10 +39,11 @@ public final class Menu extends BaseView
   {
     this.setBounds(0, 0, (int) Constants.BASE_WIDTH, (int) Constants.BASE_HEIGHT);
 
-    int w = 512, h = 144;
+    int tile = (int) Constants.BASE_WIDTH / 32;
+    int w = 8*tile, h = 2*tile;
     int x = (int) Constants.BASE_WIDTH / 2 - w / 2;
-    int y = (int) Constants.BASE_HEIGHT / 2 - h / 2;
-    int space = h + 32;
+    int y = (int) Constants.BASE_HEIGHT / 2;
+    int space = h + tile / 2;
     
     buttons.add(new MenuButton(ButtonType.START, x, y, w, h, Actions.Menu::openSaveSelection));
     buttons.add(new MenuButton(ButtonType.SETTINGS, x, (y + space), w, h, Actions.Menu::openSettings));
