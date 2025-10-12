@@ -25,9 +25,19 @@ public final class Actions
   {
     private Views() {}
 
-    public static void goTo(ViewType type)
+    public static void goToMenu()
     {
-      BaseView.switchView(type);
+      BaseView.switchView(ViewType.MENU);
+    }
+
+    public static void goToSaveSelection()
+    {
+      BaseView.switchView(ViewType.SAVE_SELECT);
+    }
+
+    public static void goToSettings()
+    {
+      BaseView.switchView(ViewType.SETTINGS);
     }
   }
 
@@ -38,17 +48,28 @@ public final class Actions
 
     public static void openSaveSelection()
     {
-      Actions.Views.goTo(ViewType.SAVE_SELECT);
+      BaseView.switchView(ViewType.SAVE_SELECT);
     }
 
     public static void openSettings()
     {
-      Actions.Views.goTo(ViewType.SETTINGS);
+      BaseView.switchView(ViewType.SETTINGS);
     }
 
     public static void closeGame()
     {
-      GameFrame.close();
+      Actions.Global.closeGame();
+    }
+  }
+
+
+  public static class SaveSelect
+  {
+    private SaveSelect() {}
+
+    public static void returnToMenu()
+    {
+      BaseView.switchView(ViewType.MENU);
     }
   }
 }

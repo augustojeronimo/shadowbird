@@ -1,6 +1,7 @@
 package com.augustojeronimo.tori.window;
 
 import com.augustojeronimo.tori.core.GameThread;
+import com.augustojeronimo.tori.io.AssetFinder;
 import com.augustojeronimo.tori.views.BaseView;
 
 import javax.swing.WindowConstants;

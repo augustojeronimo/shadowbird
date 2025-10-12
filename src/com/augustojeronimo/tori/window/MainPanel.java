@@ -2,9 +2,9 @@ package com.augustojeronimo.tori.window;
 
 import com.augustojeronimo.tori.constants.Constants;
 import com.augustojeronimo.tori.views.menu.Menu;
+import com.augustojeronimo.tori.views.saveselect.SaveSelect;
 
 import javax.swing.JPanel;
-import java.awt.CardLayout;
 import java.awt.Color;
 
 
@@ -31,7 +31,7 @@ public class MainPanel extends JPanel
 
   private void configure()
   {
-    this.setLayout(new CardLayout());
+    this.setLayout(null);
     this.setBackground(Color.DARK_GRAY);
     this.setDoubleBuffered(true);
   }
@@ -85,6 +85,7 @@ public class MainPanel extends JPanel
   private void setViews()
   {
     add(Menu.getInstance());
+    add(SaveSelect.getInstance());
   }
 
   public static void tick()
