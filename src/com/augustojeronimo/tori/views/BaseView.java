@@ -1,6 +1,7 @@
 package com.augustojeronimo.tori.views;
 
 import com.augustojeronimo.tori.constants.Constants;
+import com.augustojeronimo.tori.core.Actions;
 import com.augustojeronimo.tori.graphics.UIElement;
 import com.augustojeronimo.tori.input.InputManager;
 import com.augustojeronimo.tori.input.KeyAction;
@@ -85,9 +86,7 @@ public abstract class BaseView extends UIElement
   protected void setDefaultKeyActions()
   {
     // TO DO: Global KeyActions
-    inputManager.addKeyAction(new KeyAction(() -> {
-      GameFrame.toggleFullscreen();
-    }, false, KeyEvent.VK_F));
+    inputManager.addKeyAction(new KeyAction(Actions.Global::toggleFullscreen, false, KeyEvent.VK_F));
   }
 
   protected void gainFocus() {}

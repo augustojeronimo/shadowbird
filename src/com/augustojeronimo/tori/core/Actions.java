@@ -1,5 +1,6 @@
 package com.augustojeronimo.tori.core;
 
+import com.augustojeronimo.tori.io.config.Settings;
 import com.augustojeronimo.tori.views.BaseView;
 import com.augustojeronimo.tori.views.ViewType;
 import com.augustojeronimo.tori.window.GameFrame;
@@ -17,6 +18,11 @@ public final class Actions
     public static void closeGame()
     {
       GameFrame.close();
+    }
+
+    public static void toggleFullscreen()
+    {
+      Settings.Window.setFullscreen(! Settings.Window.isFullscreen());
     }
   }
 

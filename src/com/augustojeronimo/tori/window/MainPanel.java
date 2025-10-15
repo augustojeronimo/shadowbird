@@ -88,7 +88,7 @@ public class MainPanel extends JPanel
     add(SaveSelect.getInstance());
   }
 
-  public static void tick()
+  public static void update()
   {
     MainPanel.getInstance().position16by9();
     MainPanel.getInstance().setScaleRender();

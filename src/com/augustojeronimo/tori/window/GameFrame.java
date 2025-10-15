@@ -1,12 +1,14 @@
 package com.augustojeronimo.tori.window;
 
+import com.augustojeronimo.tori.constants.Constants;
 import com.augustojeronimo.tori.core.GameThread;
-import com.augustojeronimo.tori.io.AssetFinder;
+import com.augustojeronimo.tori.io.config.Settings;
 import com.augustojeronimo.tori.views.BaseView;
 
 import javax.swing.WindowConstants;
 import javax.swing.JFrame;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 
@@ -24,16 +26,21 @@ public class GameFrame
 
     frame = new JFrame("Kage no Tori");
     frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+    frame.setMinimumSize(new Dimension((int) Constants.MIN_WIDTH, (int) Constants.MIN_HEIGHT));
+    frame.setLocationRelativeTo(null);
     frame.setUndecorated(true);
     frame.setResizable(false);
     frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
     frame.getContentPane().setBackground(Color.BLACK);
     frame.setLayout(null);
 
     frame.add(MainPanel.getInstance());
 
     frame.setVisible(true);
-    toggleFullscreen();
+
+    Settings.Global.init();
 
     GameThread.getInstance().start();
   }
@@ -44,9 +51,11 @@ public class GameFrame
     return frame;
   }
 
-  public static void toggleFullscreen()
+  private static void checkToggleFullscreen()
   {
     if (frame == null) return;
+
+    if (fullscreen == Settings.Window.isFullscreen()) return;
 
     GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
     
@@ -70,12 +79,19 @@ public class GameFrame
   {
     if (frame == null) return;
 
-    MainPanel.tick();
+    update();
+
     BaseView active = BaseView.getActiveView();
 
     if (active != null) {
       active.tick();
       active.repaint();
     }
+  }
+
+  private static void update()
+  {
+    checkToggleFullscreen();
+    MainPanel.update();
   }
 }

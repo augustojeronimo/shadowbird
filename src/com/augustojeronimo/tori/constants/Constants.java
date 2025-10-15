@@ -9,5 +9,8 @@ public final class Constants
   public static final int FPS = 60;
   public static final double BASE_WIDTH = 1920.0;
   public static final double BASE_HEIGHT = 1080.0;
+  public static final double MIN_WIDTH = 720.0;
+  public static final double MIN_HEIGHT = 405.0;
+
   public static final int SAVE_SLOTS = 3;
 }
