@@ -66,4 +66,18 @@ public final class Assets
     }
   }
   
+  public final class Tiles
+  {
+    private static final String BASE_DIR = "sprite/world/map/tiles/";
+
+    public static BufferedImage test()
+    {
+      return SpriteLoader.getImage(BASE_DIR+"tile_test"+EXTENSION);
+    }
+
+    public static BufferedImage player()
+    {
+      return SpriteLoader.getImage(BASE_DIR+"player"+EXTENSION);
+    }
+  }
 }

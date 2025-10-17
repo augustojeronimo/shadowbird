@@ -16,7 +16,7 @@ public class KeyAction
     this.action = action;
     this.holdable = holdable;
 
-    wasPressed = false;
+    wasPressed = true;
   }
 
   public boolean active()

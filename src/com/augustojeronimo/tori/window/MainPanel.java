@@ -1,6 +1,7 @@
 package com.augustojeronimo.tori.window;
 
 import com.augustojeronimo.tori.constants.Constants;
+import com.augustojeronimo.tori.views.game.Game;
 import com.augustojeronimo.tori.views.menu.Menu;
 import com.augustojeronimo.tori.views.saveselect.SaveSelect;
 
@@ -86,6 +87,7 @@ public class MainPanel extends JPanel
   {
     add(Menu.getInstance());
     add(SaveSelect.getInstance());
+    add(Game.getInstance());
   }
 
   public static void update()

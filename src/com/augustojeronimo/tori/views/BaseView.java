@@ -6,7 +6,6 @@ import com.augustojeronimo.tori.graphics.UIElement;
 import com.augustojeronimo.tori.input.InputManager;
 import com.augustojeronimo.tori.input.KeyAction;
 import com.augustojeronimo.tori.input.KeyboardInput;
-import com.augustojeronimo.tori.window.GameFrame;
 import java.awt.event.KeyEvent;
 
 import java.util.ArrayList;

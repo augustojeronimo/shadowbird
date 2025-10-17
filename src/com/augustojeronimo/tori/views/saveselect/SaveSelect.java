@@ -54,7 +54,9 @@ public final class SaveSelect extends BaseView
     int startY = 2 * tile;
 
     for (int i = 0; i < totalSlots; i++) {
-      Slot slot = new Slot(i + 1);
+      Slot slot = new Slot(i + 1, () -> {
+        BaseView.switchView(ViewType.GAME);
+      });
 
       int x = startX + i * (slotWidth + spacing);
 
@@ -74,7 +76,7 @@ public final class SaveSelect extends BaseView
     inputManager.addKeyAction(new KeyAction(Actions.SaveSelect::returnToMenu, false, KeyEvent.VK_ESCAPE));
     inputManager.addKeyAction(new KeyAction(this::focusLeft, false, KeyEvent.VK_A));
     inputManager.addKeyAction(new KeyAction(this::focusRight, false, KeyEvent.VK_D));
-    inputManager.addKeyAction(new KeyAction(this::triggerSlot, false, KeyEvent.VK_ENTER));
+    inputManager.addKeyAction(new KeyAction(() -> slots.get(activeIndex).trigger(), false, KeyEvent.VK_ENTER));
   }
 
   @Override
@@ -105,10 +107,5 @@ public final class SaveSelect extends BaseView
     slots.get(activeIndex).setActive(false);
     activeIndex = (activeIndex + 1) % slots.size();
     slots.get(activeIndex).setActive(true);
-  }
-
-  public void triggerSlot()
-  {
-    slots.get(activeIndex).trigger();
   }
 }

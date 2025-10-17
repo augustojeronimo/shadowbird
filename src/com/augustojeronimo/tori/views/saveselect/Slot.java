@@ -12,13 +12,15 @@ public final class Slot extends UIElement
 {
   private boolean active;
   private int number;
+  private Runnable action;
 
-  public Slot(int number)
+  public Slot(int number, Runnable action)
   {
     if (number < 1 || number > Constants.SAVE_SLOTS) throw new IllegalArgumentException("Slot number must be between 1 and "+Constants.SAVE_SLOTS+". Received: "+ number);
 
     this.number = number;
     this.active = false;
+    this.action = action;
 
     verifyData();
   }
@@ -43,6 +45,6 @@ public final class Slot extends UIElement
 
   public void trigger()
   {
-    // TO DO: load game
+    action.run();
   }
 }
