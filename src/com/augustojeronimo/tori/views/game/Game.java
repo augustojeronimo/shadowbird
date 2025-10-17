@@ -14,7 +14,6 @@ public final class Game extends BaseView
   private static Game instance;
 
   private World world;
-  private int saveSlot;
 
   private Game()
   {
@@ -33,7 +32,7 @@ public final class Game extends BaseView
 
   public void configure()
   {
-    world = new World(50, 50);
+    world = new World();
   }
 
   @Override

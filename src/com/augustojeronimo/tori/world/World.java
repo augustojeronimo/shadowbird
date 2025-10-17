@@ -2,8 +2,8 @@ package com.augustojeronimo.tori.world;
 
 import com.augustojeronimo.tori.world.entities.Entity;
 import com.augustojeronimo.tori.world.entities.Player;
-import com.augustojeronimo.tori.world.map.TileMap;
-import com.augustojeronimo.tori.world.tiles.Tile;
+import com.augustojeronimo.tori.world.map.MapRegistry;
+import com.augustojeronimo.tori.world.map.WorldLayer;
 import java.awt.Graphics;
 
 import java.util.ArrayList;
@@ -11,21 +11,18 @@ import java.util.List;
 
 public final class World
 {
-  private final TileMap map;
+  private final WorldLayer map;
   private final List<Entity> entities;
   private final Camera camera;
 
   private final Player player;
 
-  public World(int cols, int rows)
+  public World()
   {
-    int centerX = Tile.SIZE*cols/2;
-    int centerY = Tile.SIZE*rows/2;
-
-    map = new TileMap(cols, rows);
+    map = MapRegistry.get("tutorial");
     entities = new ArrayList<>();
     
-    player = new Player(this, centerX - 64, centerY - 64);
+    player = new Player(this, 0, 0);
     addEntity(player);
 
     this.camera = player.getCamera();
@@ -48,5 +45,5 @@ public final class World
 
   public Player getPlayer() { return player; }
 
-  public TileMap getMap() { return map; }
+  public WorldLayer getMap() { return map; }
 }

@@ -5,11 +5,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 
-public class Finder
+public abstract class Finder
 {
   private static final String BASE_DIR = ".";
-
-  protected Finder() {}
 
   public static String getPath(String relativePath)
   {

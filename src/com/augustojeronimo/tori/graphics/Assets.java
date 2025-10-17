@@ -1,5 +1,6 @@
 package com.augustojeronimo.tori.graphics;
 
+import com.augustojeronimo.tori.io.GridLoader;
 import com.augustojeronimo.tori.io.SpriteLoader;
 
 import java.awt.image.BufferedImage;
@@ -63,21 +64,6 @@ public final class Assets
     {
       String sprite = "slot_data" + (active ? "_active" : "");
       return SpriteLoader.getImage(BASE_DIR+sprite+EXTENSION);
-    }
-  }
-  
-  public final class Tiles
-  {
-    private static final String BASE_DIR = "sprite/world/map/tiles/";
-
-    public static BufferedImage test()
-    {
-      return SpriteLoader.getImage(BASE_DIR+"tile_test"+EXTENSION);
-    }
-
-    public static BufferedImage player()
-    {
-      return SpriteLoader.getImage(BASE_DIR+"player"+EXTENSION);
     }
   }
 }

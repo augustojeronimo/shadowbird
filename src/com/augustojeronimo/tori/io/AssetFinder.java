@@ -6,14 +6,12 @@ import com.augustojeronimo.tori.constants.Constants;
 import java.util.Map;
 
 
-public class AssetFinder extends Finder
+public abstract class AssetFinder extends Finder
 {
   private static  final Map<String, String> cache = new HashMap<>();
 
   private static final String BASE_DIR = "assets/locales/";
   private static String fallback;
-
-  private AssetFinder() {}
 
   public static void setFallback(String fallback)
   {

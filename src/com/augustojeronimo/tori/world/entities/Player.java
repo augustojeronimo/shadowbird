@@ -1,13 +1,15 @@
 package com.augustojeronimo.tori.world.entities;
 
 import com.augustojeronimo.tori.core.GameClock;
-import com.augustojeronimo.tori.graphics.Assets;
+import com.augustojeronimo.tori.graphics.GameAssets;
 import com.augustojeronimo.tori.input.KeyAction;
 import com.augustojeronimo.tori.world.Camera;
 import com.augustojeronimo.tori.world.World;
+
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+
 
 public class Player extends Entity
 {
@@ -27,7 +29,7 @@ public class Player extends Entity
 
   @Override
   public BufferedImage getSprite() {
-    return Assets.Tiles.player();
+    return GameAssets.Tiles.player();
   }
 
   @Override
