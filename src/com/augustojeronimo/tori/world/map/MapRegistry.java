@@ -5,11 +5,11 @@ import java.util.Map;
 
 public class MapRegistry
 {
-  private final static Map<String, WorldLayer> maps = new HashMap<>();
+  private final static Map<String, GroundLayer> maps = new HashMap<>();
 
   static {
     maps.put("tutorial", new TutorialMap());
   }
 
-  public static WorldLayer get(String name) { return maps.get(name); }
+  public static GroundLayer get(String name) { return maps.get(name); }
 }

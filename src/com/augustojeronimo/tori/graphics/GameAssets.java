@@ -20,6 +20,13 @@ public final class GameAssets
       return SpriteLoader.getImage(BASE_DIR+sprite+EXTENSION);
     }
 
+    public static BufferedImage getAnimated(String sprite, int frame, int width, int heigth)
+    {
+      if (sprite == null || frame < 0) return null;
+      String path = BASE_DIR+sprite+EXTENSION;
+      return SpriteLoader.getImageFrame(path, frame, width, heigth);
+    }
+
     public static BufferedImage player()
     {
       return SpriteLoader.getImage(BASE_DIR+"player"+EXTENSION);

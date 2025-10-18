@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.imageio.ImageIO;
 
+
 public class SpriteLoader
 {
   private static final Map<String, BufferedImage> cache = new HashMap<>();
@@ -28,6 +29,33 @@ public class SpriteLoader
       BufferedImage image = ImageIO.read(new File(path));
       cache.put(path, image);
       return image;
+
+    } catch (IOException e) {
+      e.printStackTrace();
+      return null;
+    }
+  }
+
+  public static BufferedImage getImageFrame(String relativePath, int frame, int width, int height)
+  {
+    String path = AssetFinder.getPath(relativePath);
+
+    String cacheKey = path+"["+frame+"]";
+    if (cache.containsKey(cacheKey)) {
+        return cache.get(cacheKey);
+    }
+
+    try {
+      if (path == null) throw new IOException("File not found at: "+ relativePath);
+
+      BufferedImage fullImage = ImageIO.read(new File(path));
+
+      if (frame < 0 || frame * width >= fullImage.getWidth()) throw new IllegalArgumentException("Frame index out of bounds: " + frame);
+
+      BufferedImage frameImage = fullImage.getSubimage(frame * width, 0, width, height);
+
+      cache.put(cacheKey, frameImage);
+      return frameImage;
 
     } catch (IOException e) {
       e.printStackTrace();

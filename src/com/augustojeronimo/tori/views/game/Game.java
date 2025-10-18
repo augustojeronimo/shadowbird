@@ -33,6 +33,7 @@ public final class Game extends BaseView
   public void configure()
   {
     world = new World();
+    world.load(); // move to a separeted section and modify to load data from the saved file
   }
 
   @Override

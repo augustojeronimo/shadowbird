@@ -11,16 +11,21 @@ public class Tile extends GameObject
   public static final double SCALE = 2;
   public static final int SIZE = (int) (SPRITE_SIZE * SCALE);
 
-  private final TileType type;
+  protected final String name;
 
-  public Tile(int xIndex, int yIndex, TileType type)
+  public Tile(int xIndex, int yIndex, String name, boolean solid)
   {
-    super(xIndex * SIZE, yIndex * SIZE, SIZE, SIZE, type.isSolid());
-    this.type = type;
+    super(xIndex * SIZE, yIndex * SIZE, SIZE, SIZE, solid);
+    this.name = name;
   }
 
   @Override
   public BufferedImage getSprite() {
-    return GameAssets.Tiles.get(type.getSpriteName());
+    return GameAssets.Tiles.get(name);
+  }
+
+  public Tile getClone(int x, int y)
+  {
+    return new Tile(x, y, name, solid);
   }
 }

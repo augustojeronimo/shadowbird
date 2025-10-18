@@ -6,11 +6,11 @@ import com.augustojeronimo.tori.world.tiles.TileRegistry;
 
 import java.awt.Graphics;
 
-public abstract class WorldLayer
+public abstract class GroundLayer
 {
   private final Tile[][] floor;
 
-  protected WorldLayer(int[][] grid)
+  protected GroundLayer(int[][] grid)
   {
     int cols = grid.length;
     int rows = grid[0].length;
@@ -19,7 +19,16 @@ public abstract class WorldLayer
     for (int x = 0; x < cols; x++) {
       for (int y = 0; y < rows; y++) {
         int id = grid[x][y];
-        this.floor[x][y] = TileRegistry.createTile(x, y, id);
+        this.floor[x][y] = TileRegistry.create(x, y, id);
+      }
+    }
+  }
+
+  public void tick()
+  {
+    for (int x = 0; x < getCols(); x++) {
+      for (int y = 0; y < getRows(); y++) {
+        this.floor[x][y].tick();
       }
     }
   }
