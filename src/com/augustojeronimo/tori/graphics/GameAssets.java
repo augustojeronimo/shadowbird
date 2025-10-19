@@ -8,7 +8,7 @@ public final class GameAssets
 {
   private GameAssets() {}
 
-  public final class Tiles
+  public final class Tile
   {
     private static final String EXTENSION = ".png";
 
@@ -38,14 +38,14 @@ public final class GameAssets
     }
   }
 
-  public final class Maps
+  public final class Grid
   {
     private static final String BASE_DIR = "assets/maps/";
     private static final String EXTENSION = ".map";
 
-    public static int[][] tutorial()
+    public static int[][] start()
     {
-      return GridLoader.getMap(BASE_DIR+"tutorial"+EXTENSION);
+      return GridLoader.getMap(BASE_DIR+"start"+EXTENSION);
     }
   }
 }

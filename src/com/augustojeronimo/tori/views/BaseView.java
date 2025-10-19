@@ -72,6 +72,7 @@ public abstract class BaseView extends UIElement
     if (older != null && !older.equals(activeView)) older.setVisible(false);
     activeView.setVisible(true);
     activeView.requestFocus();
+    activeView.gainFocus();
   }
 
   public void tick()

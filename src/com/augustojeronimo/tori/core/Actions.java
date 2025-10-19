@@ -1,6 +1,7 @@
 package com.augustojeronimo.tori.core;
 
 import com.augustojeronimo.tori.io.config.Settings;
+import com.augustojeronimo.tori.io.save.SaveManager;
 import com.augustojeronimo.tori.views.BaseView;
 import com.augustojeronimo.tori.views.ViewType;
 import com.augustojeronimo.tori.window.GameFrame;
@@ -76,6 +77,27 @@ public final class Actions
     public static void returnToMenu()
     {
       BaseView.switchView(ViewType.MENU);
+    }
+
+    public static Runnable SlotAction(int index)
+    {
+      return switch (index) {
+        case 0 -> () -> {
+          SaveManager.selectSlot(SaveManager.SLOT_1);
+          BaseView.switchView(ViewType.GAME);
+        };
+        case 1 -> () -> {
+          SaveManager.selectSlot(SaveManager.SLOT_2);
+          BaseView.switchView(ViewType.GAME);
+        };
+        case 2 -> () -> {
+          SaveManager.selectSlot(SaveManager.SLOT_3);
+          BaseView.switchView(ViewType.GAME);
+        };
+        default -> () -> {
+
+        };
+      };
     }
   }
 }

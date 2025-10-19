@@ -21,7 +21,7 @@ public class Tile extends GameObject
 
   @Override
   public BufferedImage getSprite() {
-    return GameAssets.Tiles.get(name);
+    return GameAssets.Tile.get(name);
   }
 
   public Tile getClone(int x, int y)

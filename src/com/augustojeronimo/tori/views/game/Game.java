@@ -57,4 +57,9 @@ public final class Game extends BaseView
     g.fillRect(0, 0, getWidth(), getHeight());
     world.render(g);
   }
+
+  @Override
+  protected void gainFocus() {
+    // Start Game
+  }
 }

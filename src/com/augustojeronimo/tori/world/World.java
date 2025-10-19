@@ -4,16 +4,18 @@ import com.augustojeronimo.tori.world.entities.Entity;
 import com.augustojeronimo.tori.world.entities.Player;
 import com.augustojeronimo.tori.world.map.MapRegistry;
 import com.augustojeronimo.tori.world.map.GroundLayer;
+import com.augustojeronimo.tori.world.map.WorldMap;
 import java.awt.Graphics;
 
 import java.util.ArrayList;
 import java.util.List;
 
+
 public final class World
 {
   private boolean initialized;
   
-  private GroundLayer map;
+  private WorldMap map;
   private List<Entity> entities;
   private Camera camera;
 
@@ -23,7 +25,7 @@ public final class World
   {
     initialized = false;
 
-    map = MapRegistry.get("tutorial");
+    map = MapRegistry.get(0);
     entities = new ArrayList<>();
     
     player = new Player(this, 0, 0);

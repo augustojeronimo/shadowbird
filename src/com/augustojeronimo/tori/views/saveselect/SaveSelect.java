@@ -6,6 +6,7 @@ import com.augustojeronimo.tori.graphics.Assets;
 import com.augustojeronimo.tori.graphics.Renderer;
 import com.augustojeronimo.tori.graphics.UIElement;
 import com.augustojeronimo.tori.input.KeyAction;
+import com.augustojeronimo.tori.io.save.SaveManager;
 import com.augustojeronimo.tori.views.BaseView;
 import com.augustojeronimo.tori.views.ViewType;
 
@@ -54,9 +55,7 @@ public final class SaveSelect extends BaseView
     int startY = 2 * tile;
 
     for (int i = 0; i < totalSlots; i++) {
-      Slot slot = new Slot(i + 1, () -> {
-        BaseView.switchView(ViewType.GAME);
-      });
+      Slot slot = new Slot(i + 1, Actions.SaveSelect.SlotAction(i));
 
       int x = startX + i * (slotWidth + spacing);
 

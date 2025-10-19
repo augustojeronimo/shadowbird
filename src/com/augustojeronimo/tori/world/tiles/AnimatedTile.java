@@ -3,6 +3,7 @@ package com.augustojeronimo.tori.world.tiles;
 import com.augustojeronimo.tori.graphics.GameAssets;
 import java.awt.image.BufferedImage;
 
+
 public class AnimatedTile extends Tile
 {
   protected int[] framesDurations;
@@ -22,7 +23,7 @@ public class AnimatedTile extends Tile
 
   @Override
   public BufferedImage getSprite() {
-    return GameAssets.Tiles.getAnimated(name, currentFrame, SPRITE_SIZE, SPRITE_SIZE);
+    return GameAssets.Tile.getAnimated(name, currentFrame, SPRITE_SIZE, SPRITE_SIZE);
   }
 
   @Override

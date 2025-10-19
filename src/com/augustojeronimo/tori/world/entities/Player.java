@@ -13,30 +13,32 @@ import java.awt.image.BufferedImage;
 
 public class Player extends Entity
 {
-  private World world;
-  private double speed = 6.0;
-  private Camera camera;
+  private final World context;
+  private final double speed = 6.0;
+  private final Camera camera;
 
-  public Player(World world, int worldX, int worldY) {
+  private final int frameDelay = 3;
+
+  public Player(World worldContext, int worldX, int worldY) {
     super(worldX, worldY, 64, 64, true,
     new Rectangle[] {
       new Rectangle(16, 16, 32, 32)
     });
 
-    this.world = world;
-    this.camera = new Camera(getWorldXCenter(), getWorldYCenter(), world.getMap().getWidth(), world.getMap().getHeight());
+    this.context = worldContext;
+    this.camera = new Camera(getWorldXCenter(), getWorldYCenter(), worldContext.getMap().getWidth(), worldContext.getMap().getHeight());
   }
 
   @Override
   public BufferedImage getSprite() {
-    return GameAssets.Tiles.player();
+    return GameAssets.Tile.player();
   }
 
   @Override
   public void tick()
   {
     final int delayX = getWorldXCenter(), delayY = getWorldYCenter();
-    GameClock.addEvent(3, () -> world.getCamera().setPosition(delayX, delayY));
+    GameClock.addEvent(frameDelay, () -> context.getCamera().setPosition(delayX, delayY));
   }
 
   public void moveUp() { worldY -= speed; }

@@ -11,11 +11,11 @@ public class TileRegistry
   static {
     Tile none = new Tile(0, 0, "null", false);
     Tile grass = new Tile(0, 0, "grass", false);
-    Tile animated = new AnimatedTile(0, 0, "animated_grass_2", false, new int[] {45, 30});
+    Tile animated = new AnimatedTile(0, 0, "grass_2", false, new int[] {45, 30});
     
     types.put(0, none);
-    types.put(2, grass);
-    types.put(1, animated);
+    types.put(1, grass);
+    types.put(2, animated);
   }
 
   public static Tile create(int x, int y, int id)

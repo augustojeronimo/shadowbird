@@ -50,11 +50,10 @@ public final class JSONIO
 
   public static boolean write(String path, JsonElement json)
   {
+    if (path == null || json == null) return false;
+    String nPath = normalize(path);
+
     try {
-      if (path == null || json == null) return false;
-
-      String nPath = normalize(path);
-
       Files.writeString(Paths.get(nPath), GSON.toJson(json));
 
       if (json.isJsonObject()) cache.put(nPath, json.getAsJsonObject());

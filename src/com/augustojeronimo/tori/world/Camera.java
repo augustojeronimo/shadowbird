@@ -31,11 +31,14 @@ public final class Camera
       int minX = width / 2;
       int maxX = mapWidth - width / 2;
 
-      if (centerX <= this.centerX) {
-        this.centerX = (centerX < minX) ? minX : centerX;
+      if (centerX <= minX) {
+        this.centerX = minX;
+      }
+      else if (centerX >= maxX) {
+        this.centerX = maxX;
       }
       else {
-        this.centerX = (centerX > maxX) ? maxX : centerX;
+        this.centerX = centerX;
       }
     }
     
@@ -46,11 +49,14 @@ public final class Camera
       int minY = height / 2;
       int maxY = mapHeight - height / 2;
   
-      if (centerY <= this.centerY) {
-        this.centerY = (centerY < minY) ? minY : centerY;
+      if (centerY <= minY) {
+        this.centerY = minY;
+      }
+      else if (centerY >= maxY) {
+        this.centerY = maxY;
       }
       else {
-        this.centerY = (centerY > maxY && centerY >= this.centerY) ? maxY : centerY;
+        this.centerY = centerY;
       }
     }
   }
