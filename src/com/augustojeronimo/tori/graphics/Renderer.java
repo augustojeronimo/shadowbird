@@ -1,11 +1,15 @@
 package com.augustojeronimo.tori.graphics;
 
+import com.augustojeronimo.tori.constants.Constants;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import com.augustojeronimo.tori.window.MainPanel;
 import com.augustojeronimo.tori.world.Camera;
 import com.augustojeronimo.tori.world.GameObject;
+import com.augustojeronimo.tori.world.entities.Entity;
+import java.awt.Rectangle;
 
 public class Renderer
 {
@@ -30,12 +34,22 @@ public class Renderer
     double scaleX = MainPanel.getInstance().getScaleX();
     double scaleY = MainPanel.getInstance().getScaleY();
 
-    int screenX = (int) ((obj.getWorldX() - c.getX()) * scaleX);
-    int screenY = (int) ((obj.getWorldY() - c.getY()) * scaleY);
+    int screenX = (int) ((obj.getXLeft() - c.getX()) * scaleX);
+    int screenY = (int) ((obj.getYTop() - c.getY()) * scaleY);
     int scaledW = (int) (obj.getWidth() * scaleX);
     int scaledH = (int) (obj.getHeight() * scaleY);
 
     BufferedImage sprite = obj.getSprite();
     if (sprite != null) graphics.drawImage(sprite, screenX, screenY, scaledW, scaledH, null);
+
+
+    if (Constants.DEBUG) {
+      if (obj instanceof Entity ett) {
+        for (Rectangle rect : ett.getHitbox().get()) {
+          graphics.setColor(Color.RED);
+          graphics.drawRect(screenX + rect.x, screenY + rect.y, (int) (rect.width * scaleX), (int) (rect.height * scaleY));
+        }
+      }
+    }
   }
 }

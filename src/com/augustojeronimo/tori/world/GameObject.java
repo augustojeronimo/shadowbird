@@ -26,10 +26,13 @@ public abstract class GameObject
     Renderer.renderGameObject(g, this, c);
   }
 
-  public int getWorldX() { return worldX; }
-  public int getWorldY() { return worldY; }
-  public int getWorldXCenter() { return worldX + width / 2; }
-  public int getWorldYCenter() { return worldY + height / 2; }
+  public int getXLeft() { return worldX; }
+  public int getXCenter() { return worldX + width / 2; }
+  public int getXRight() { return worldX + width; }
+
+  public int getYTop() { return worldY; }
+  public int getYCenter() { return worldY + height / 2; }
+  public int getYBottom() { return worldY + height; }
 
   public int getWidth() { return width; }
   public int getHeight() { return height; }

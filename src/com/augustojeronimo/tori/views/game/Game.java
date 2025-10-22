@@ -1,24 +1,26 @@
 package com.augustojeronimo.tori.views.game;
 
+import com.augustojeronimo.tori.core.GameClock;
 import com.augustojeronimo.tori.input.KeyAction;
+import com.augustojeronimo.tori.io.save.SaveManager;
 import com.augustojeronimo.tori.views.BaseView;
 import com.augustojeronimo.tori.views.ViewType;
-import com.augustojeronimo.tori.world.World;
+import com.augustojeronimo.tori.world.GameContext;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 
 
 public final class Game extends BaseView
 {
   private static Game instance;
 
-  private World world;
+  private GameContext context;
 
   private Game()
   {
     super(ViewType.GAME);
-    configure();
     setDefaultKeyActions();
   }
 
@@ -30,24 +32,29 @@ public final class Game extends BaseView
     return instance;
   }
 
-  public void configure()
+  public void load(int slot)
   {
-    world = new World();
-    world.load(); // move to a separeted section and modify to load data from the saved file
+    context = new GameContext(new SaveManager(slot), inputManager);
+  }
+
+  public void close()
+  {
+    context = null;
+    switchView(ViewType.MENU);
   }
 
   @Override
-  protected void setDefaultKeyActions() {
-    for (KeyAction keyAct : world.getPlayer().getKeyActions()) {
-      inputManager.addKeyAction(keyAct);
-    }
+  protected void setDefaultKeyActions()
+  {
+    inputManager.addKeyAction(new KeyAction(this::close, false, KeyEvent.VK_CONTROL, KeyEvent.VK_ESCAPE));
   }
 
   @Override
   public void tick()
   {
     super.tick();
-    world.tick();
+    
+    if (context != null) context.tick();
   }
 
   @Override
@@ -55,11 +62,20 @@ public final class Game extends BaseView
   {
     g.setColor(Color.BLACK);
     g.fillRect(0, 0, getWidth(), getHeight());
-    world.render(g);
+    
+    if (context == null) return;;
+
+    context.render(g);
+
+    if (GameClock.isPaused()) {
+      g.setColor(new Color(0, 0, 0, 100));
+      g.fillRect(0, 0, getWidth(), getHeight());
+    }
   }
 
   @Override
   protected void gainFocus() {
-    // Start Game
+    if (context == null) throw new IllegalStateException("Uninitialized world.");
+    GameClock.resume();
   }
 }

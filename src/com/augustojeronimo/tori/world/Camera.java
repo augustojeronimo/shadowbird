@@ -1,6 +1,7 @@
 package com.augustojeronimo.tori.world;
 
 import com.augustojeronimo.tori.constants.Constants;
+import com.augustojeronimo.tori.world.map.WorldMap;
 
 public final class Camera
 {
@@ -8,10 +9,10 @@ public final class Camera
   private final int width, height;
   private final int mapWidth, mapHeight;
 
-  public Camera(int centerX, int centerY, int mapWidth, int mapHeight)
+  public Camera(int centerX, int centerY, WorldMap map)
   {
-    this.mapWidth = mapWidth;
-    this.mapHeight = mapHeight;
+    this.mapWidth = map.getWidth();
+    this.mapHeight = map.getHeight();
     this.width = (int) Constants.BASE_WIDTH;
     this.height = (int) Constants.BASE_HEIGHT;
     setPosition(centerX, centerY);

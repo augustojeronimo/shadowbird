@@ -23,18 +23,17 @@ public final class GameClock
     counter = 0;
     frame = 0;
     timers.clear();
-    paused = false;
+    paused = true;
   }
 
   public static int getSeconds() { return seconds; }
-
   public static long getFrame() { return frame; }
 
   public static boolean isPaused() { return paused; }
-
   public static void pause() { paused = true; }
-
   public static void resume() { paused = false; }
+  public static void togglePause() { paused = !paused; }
+
 
   public static void tick()
   {

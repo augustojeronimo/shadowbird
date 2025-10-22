@@ -9,6 +9,7 @@ import com.augustojeronimo.tori.input.KeyAction;
 import com.augustojeronimo.tori.io.save.SaveManager;
 import com.augustojeronimo.tori.views.BaseView;
 import com.augustojeronimo.tori.views.ViewType;
+import com.augustojeronimo.tori.views.game.Game;
 
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
@@ -54,14 +55,29 @@ public final class SaveSelect extends BaseView
     int startX = ((int) Constants.BASE_WIDTH - totalWidthSlots) / 2;
     int startY = 2 * tile;
 
-    for (int i = 0; i < totalSlots; i++) {
-      Slot slot = new Slot(i + 1, Actions.SaveSelect.SlotAction(i));
+    Slot slot1 = new Slot(SaveManager.SLOT_1, () -> {
+      Game.getInstance().load(SaveManager.SLOT_1);
+      BaseView.switchView(ViewType.GAME);
+    });
+    Slot slot2 = new Slot(SaveManager.SLOT_2, () -> {
+      Game.getInstance().load(SaveManager.SLOT_2);
+      BaseView.switchView(ViewType.GAME);
+    });
+    Slot slot3 = new Slot(SaveManager.SLOT_3, () -> {
+      Game.getInstance().load(SaveManager.SLOT_3);
+      BaseView.switchView(ViewType.GAME);
+    });
 
+    slots.add(slot1);
+    slots.add(slot2);
+    slots.add(slot3);
+    
+    for (int i = 0; i < totalSlots; i++) {
+      Slot s = slots.get(i);
       int x = startX + i * (slotWidth + spacing);
 
-      slot.setBounds(x, startY, slotWidth, slotHeight);
-      slots.add(slot);
-      components.add(slot);
+      s.setBounds(x, startY, slotWidth, slotHeight);
+      components.add(s);
     }
 
     slots.get(0).setActive(true);

@@ -78,26 +78,5 @@ public final class Actions
     {
       BaseView.switchView(ViewType.MENU);
     }
-
-    public static Runnable SlotAction(int index)
-    {
-      return switch (index) {
-        case 0 -> () -> {
-          SaveManager.selectSlot(SaveManager.SLOT_1);
-          BaseView.switchView(ViewType.GAME);
-        };
-        case 1 -> () -> {
-          SaveManager.selectSlot(SaveManager.SLOT_2);
-          BaseView.switchView(ViewType.GAME);
-        };
-        case 2 -> () -> {
-          SaveManager.selectSlot(SaveManager.SLOT_3);
-          BaseView.switchView(ViewType.GAME);
-        };
-        default -> () -> {
-
-        };
-      };
-    }
   }
 }

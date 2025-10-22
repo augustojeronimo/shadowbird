@@ -3,10 +3,10 @@ package com.augustojeronimo.tori.io.save;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SaveManager
+public final class SaveManager
 {
   private static final Map<Integer, SaveFile> slots = new HashMap<>();
-  private static SaveFile currentSlot;
+  private SaveFile currentSlot;
 
   public static final int SLOT_1 = 1;
   public static final int SLOT_2 = 2;
@@ -18,76 +18,86 @@ public class SaveManager
     slots.put(SLOT_3, new SaveFile(Save.Slot.SLOT3));
   }
 
-  public static void selectSlot(int key)
+  public final General general;
+  public final World world;
+
+  public SaveManager(int slot)
+  {
+    selectSlot(slot);
+    general = new General();
+    world = new World();
+  }
+
+  private void selectSlot(int key)
   {
     if (! slots.containsKey(key)) throw new IllegalArgumentException("Invalid slot key. Only defined values are allowed.");
     currentSlot = slots.get(key);
   }
 
-  private static void ensureSlotSelected() { if (currentSlot == null) throw new IllegalStateException("No save slot selected."); }
+  private void ensureSlotSelected() { if (currentSlot == null) throw new IllegalStateException("No save slot selected."); }
 
 
-  public static void write()
+  public void write()
   {
     ensureSlotSelected();
     currentSlot.write();
   }
 
-  public static void refresh()
+  public void refresh()
   {
     ensureSlotSelected();
     currentSlot.refresh();
   }
 
-  public static void delete()
+  public void delete()
   {
     ensureSlotSelected();
     currentSlot.deleteSave();
   }
 
 
-  public static final class General
+  public final class General
   {
-    public static int getGameTime()
+    public int getGameTime()
     {
       ensureSlotSelected();
       return currentSlot.getOrDefault(SaveFile.Section.GENERAL, "game_time", 0);
     }
 
-    public static void setGameTime(int seconds)
+    public void setGameTime(int seconds)
     {
       ensureSlotSelected();
       currentSlot.set(SaveFile.Section.GENERAL, "game_time", seconds);
     }
   }
 
-  public static final class World
+  public final class World
   {
-    public static String getMap()
+    public String getMap()
     {
       ensureSlotSelected();
       return currentSlot.getOrDefault(SaveFile.Section.WORLD, "map", "start");
     }
 
-    public static void setMap(String mapName)
+    public void setMap(String mapName)
     {
       ensureSlotSelected();
       currentSlot.getOrDefault(SaveFile.Section.WORLD, "map", mapName);
     }
 
-    public static int getSpawnX()
+    public int getSpawnX()
     {
       ensureSlotSelected();
       return currentSlot.getOrDefault(SaveFile.Section.WORLD, "spawn_x", 0);
     }
 
-    public static int getSpawnY()
+    public int getSpawnY()
     {
       ensureSlotSelected();
       return currentSlot.getOrDefault(SaveFile.Section.WORLD, "spawn_y", 0);
     }
 
-    public static void setSpawn(int x, int y)
+    public void setSpawn(int x, int y)
     {
       ensureSlotSelected();
       currentSlot.set(SaveFile.Section.WORLD, "spawn_x", x);
