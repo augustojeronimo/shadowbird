@@ -7,7 +7,7 @@ import com.augustojeronimo.tori.graphics.Renderer;
 import com.augustojeronimo.tori.graphics.UIElement;
 import com.augustojeronimo.tori.input.KeyAction;
 import com.augustojeronimo.tori.io.save.SaveManager;
-import com.augustojeronimo.tori.views.BaseView;
+import com.augustojeronimo.tori.views.View;
 import com.augustojeronimo.tori.views.ViewType;
 import com.augustojeronimo.tori.views.game.Game;
 
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public final class SaveSelect extends BaseView
+public final class SaveSelect extends View
 {
   private static SaveSelect instance;
   private final List<UIElement> components = new ArrayList<>();
@@ -28,7 +28,6 @@ public final class SaveSelect extends BaseView
   {
     super(ViewType.SAVE_SELECT);
     configure();
-    setDefaultKeyActions();
   }
 
   public static SaveSelect getInstance()
@@ -57,15 +56,15 @@ public final class SaveSelect extends BaseView
 
     Slot slot1 = new Slot(SaveManager.SLOT_1, () -> {
       Game.getInstance().load(SaveManager.SLOT_1);
-      BaseView.switchView(ViewType.GAME);
+      View.switchTo(ViewType.GAME);
     });
     Slot slot2 = new Slot(SaveManager.SLOT_2, () -> {
       Game.getInstance().load(SaveManager.SLOT_2);
-      BaseView.switchView(ViewType.GAME);
+      View.switchTo(ViewType.GAME);
     });
     Slot slot3 = new Slot(SaveManager.SLOT_3, () -> {
       Game.getInstance().load(SaveManager.SLOT_3);
-      BaseView.switchView(ViewType.GAME);
+      View.switchTo(ViewType.GAME);
     });
 
     slots.add(slot1);
@@ -105,6 +104,7 @@ public final class SaveSelect extends BaseView
   @Override
   protected void gainFocus()
   {
+    super.gainFocus();
     for (Slot slot : slots) {
       slot.verifyData();
     }

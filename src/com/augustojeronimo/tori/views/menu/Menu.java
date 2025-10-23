@@ -5,7 +5,7 @@ import com.augustojeronimo.tori.core.Actions;
 import com.augustojeronimo.tori.graphics.Assets;
 import com.augustojeronimo.tori.graphics.Renderer;
 import com.augustojeronimo.tori.input.KeyAction;
-import com.augustojeronimo.tori.views.BaseView;
+import com.augustojeronimo.tori.views.View;
 import com.augustojeronimo.tori.views.ViewType;
 
 import java.awt.Graphics;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public final class Menu extends BaseView
+public final class Menu extends View
 {
   private static Menu instance;
   private final List<MenuButton> buttons = new ArrayList<>();
@@ -24,7 +24,6 @@ public final class Menu extends BaseView
   {
     super(ViewType.MENU);
     configure();
-    setDefaultKeyActions();
   }
 
   public static Menu getInstance()

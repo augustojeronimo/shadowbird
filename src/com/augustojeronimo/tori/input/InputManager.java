@@ -7,10 +7,9 @@ public class InputManager
 {
   private final List<KeyAction> actions = new ArrayList<>();
 
-  public void addKeyAction(KeyAction keyAction)
-  {
-    actions.add(keyAction);
-  }
+  public void addKeyAction(KeyAction keyAction) { actions.add(keyAction); }
+
+  public void clearAcitions() { actions.clear(); }
 
   public void tick()
   {

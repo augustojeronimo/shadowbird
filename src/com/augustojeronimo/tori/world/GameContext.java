@@ -9,6 +9,9 @@ import com.augustojeronimo.tori.world.map.MapRegistry;
 import com.augustojeronimo.tori.world.map.WorldMap;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 public final class GameContext
@@ -36,14 +39,6 @@ public final class GameContext
     this.camera = player.getCamera();
 
     map.addEntity(player);
-
-    map.addEntity(new Player(this, 128, 128));
-
-    for (KeyAction ka : player.getKeyActions()) {
-      input.addKeyAction(ka);
-    }
-
-    input.addKeyAction(new KeyAction(GameClock::togglePause, false, KeyEvent.VK_ESCAPE));
   }
   
   public void tick()
@@ -55,6 +50,17 @@ public final class GameContext
   public void render(Graphics g)
   {
     map.render(g, camera);
+  }
+
+  public List<KeyAction> getKeyActions()
+  {
+    List<KeyAction> actions = new ArrayList<>();
+
+    actions.addAll(Arrays.asList(player.getKeyActions()));
+
+    actions.add(new KeyAction(GameClock::togglePause, false, KeyEvent.VK_ESCAPE));
+
+    return actions;
   }
   
   public SaveManager getSave() { return save; }

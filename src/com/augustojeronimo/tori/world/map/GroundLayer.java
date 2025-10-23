@@ -8,7 +8,7 @@ import java.awt.Graphics;
 
 public abstract class GroundLayer
 {
-  private final Tile[][] floor;
+  protected final Tile[][] floor;
 
   protected GroundLayer(int[][] grid)
   {
@@ -53,4 +53,10 @@ public abstract class GroundLayer
   public int getHeight() { return Tile.SIZE * getRows(); }
   public int getCols() { return floor.length; }
   public int getRows() { return floor[0].length; }
+
+  public boolean isSolidTile(int xIndex, int yIndex)
+  {
+    if (xIndex < 0 || xIndex >= floor.length || yIndex < 0 || yIndex >= floor[0].length) throw new IndexOutOfBoundsException("Index out of bounds of map.");
+    return floor[xIndex][yIndex].isSolid();
+  }
 }

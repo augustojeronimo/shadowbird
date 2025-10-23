@@ -3,7 +3,7 @@ package com.augustojeronimo.tori.views.game;
 import com.augustojeronimo.tori.core.GameClock;
 import com.augustojeronimo.tori.input.KeyAction;
 import com.augustojeronimo.tori.io.save.SaveManager;
-import com.augustojeronimo.tori.views.BaseView;
+import com.augustojeronimo.tori.views.View;
 import com.augustojeronimo.tori.views.ViewType;
 import com.augustojeronimo.tori.world.GameContext;
 
@@ -12,7 +12,7 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
 
-public final class Game extends BaseView
+public final class Game extends View
 {
   private static Game instance;
 
@@ -21,7 +21,6 @@ public final class Game extends BaseView
   private Game()
   {
     super(ViewType.GAME);
-    setDefaultKeyActions();
   }
 
   public static Game getInstance()
@@ -40,13 +39,17 @@ public final class Game extends BaseView
   public void close()
   {
     context = null;
-    switchView(ViewType.MENU);
+    switchTo(ViewType.MENU);
   }
 
   @Override
   protected void setDefaultKeyActions()
   {
     inputManager.addKeyAction(new KeyAction(this::close, false, KeyEvent.VK_CONTROL, KeyEvent.VK_ESCAPE));
+
+    for (KeyAction ka : context.getKeyActions()) {
+      inputManager.addKeyAction(ka);
+    }
   }
 
   @Override
@@ -63,7 +66,7 @@ public final class Game extends BaseView
     g.setColor(Color.BLACK);
     g.fillRect(0, 0, getWidth(), getHeight());
     
-    if (context == null) return;;
+    if (context == null) return;
 
     context.render(g);
 
@@ -75,6 +78,7 @@ public final class Game extends BaseView
 
   @Override
   protected void gainFocus() {
+    super.gainFocus();
     if (context == null) throw new IllegalStateException("Uninitialized world.");
     GameClock.resume();
   }

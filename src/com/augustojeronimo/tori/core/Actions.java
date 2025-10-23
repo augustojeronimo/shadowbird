@@ -1,8 +1,7 @@
 package com.augustojeronimo.tori.core;
 
 import com.augustojeronimo.tori.io.config.Settings;
-import com.augustojeronimo.tori.io.save.SaveManager;
-import com.augustojeronimo.tori.views.BaseView;
+import com.augustojeronimo.tori.views.View;
 import com.augustojeronimo.tori.views.ViewType;
 import com.augustojeronimo.tori.window.GameFrame;
 
@@ -34,17 +33,17 @@ public final class Actions
 
     public static void goToMenu()
     {
-      BaseView.switchView(ViewType.MENU);
+      View.switchTo(ViewType.MENU);
     }
 
     public static void goToSaveSelection()
     {
-      BaseView.switchView(ViewType.SAVE_SELECT);
+      View.switchTo(ViewType.SAVE_SELECT);
     }
 
     public static void goToSettings()
     {
-      BaseView.switchView(ViewType.SETTINGS);
+      View.switchTo(ViewType.SETTINGS);
     }
   }
 
@@ -55,12 +54,12 @@ public final class Actions
 
     public static void openSaveSelection()
     {
-      BaseView.switchView(ViewType.SAVE_SELECT);
+      View.switchTo(ViewType.SAVE_SELECT);
     }
 
     public static void openSettings()
     {
-      BaseView.switchView(ViewType.SETTINGS);
+      View.switchTo(ViewType.SETTINGS);
     }
 
     public static void closeGame()
@@ -76,7 +75,7 @@ public final class Actions
 
     public static void returnToMenu()
     {
-      BaseView.switchView(ViewType.MENU);
+      View.switchTo(ViewType.MENU);
     }
   }
 }

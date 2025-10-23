@@ -4,7 +4,7 @@ public final class Constants
 {
   private Constants() {}
   
-  public static final boolean DEBUG = false; 
+  public static final boolean DEBUG = false;
 
   public static final int FPS = 60;
   public static final double ASPECT_RATIO = 16.0 / 9.0;

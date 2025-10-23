@@ -1,6 +1,5 @@
 package com.augustojeronimo.tori.graphics;
 
-import com.augustojeronimo.tori.io.GridLoader;
 import com.augustojeronimo.tori.io.SpriteLoader;
 
 import java.awt.image.BufferedImage;

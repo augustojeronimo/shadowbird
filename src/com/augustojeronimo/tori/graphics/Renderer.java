@@ -11,6 +11,7 @@ import com.augustojeronimo.tori.world.GameObject;
 import com.augustojeronimo.tori.world.entities.Entity;
 import java.awt.Rectangle;
 
+
 public class Renderer
 {
   private Renderer() {}
@@ -45,8 +46,12 @@ public class Renderer
 
     if (Constants.DEBUG) {
       if (obj instanceof Entity ett) {
-        for (Rectangle rect : ett.getHitbox().get()) {
+        for (Rectangle rect : ett.getCollisionHitbox().get()) {
           graphics.setColor(Color.RED);
+          graphics.drawRect(screenX + rect.x, screenY + rect.y, (int) (rect.width * scaleX), (int) (rect.height * scaleY));
+        }
+        for (Rectangle rect : ett.getTouchHitbox().get()) {
+          graphics.setColor(Color.YELLOW);
           graphics.drawRect(screenX + rect.x, screenY + rect.y, (int) (rect.width * scaleX), (int) (rect.height * scaleY));
         }
       }

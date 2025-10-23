@@ -3,7 +3,7 @@ package com.augustojeronimo.tori.window;
 import com.augustojeronimo.tori.constants.Constants;
 import com.augustojeronimo.tori.core.GameThread;
 import com.augustojeronimo.tori.io.config.Settings;
-import com.augustojeronimo.tori.views.BaseView;
+import com.augustojeronimo.tori.views.View;
 
 import javax.swing.WindowConstants;
 import javax.swing.JFrame;
@@ -81,7 +81,7 @@ public class GameFrame
 
     update();
 
-    BaseView active = BaseView.getActiveView();
+    View active = View.getActiveView();
 
     if (active != null) {
       active.tick();

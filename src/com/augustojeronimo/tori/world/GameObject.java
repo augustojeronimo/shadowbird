@@ -34,6 +34,12 @@ public abstract class GameObject
   public int getYCenter() { return worldY + height / 2; }
   public int getYBottom() { return worldY + height; }
 
+  public void setPosition(int worldX, int worldY)
+  {
+    this.worldX = worldX;
+    this.worldY = worldY;
+  }
+
   public int getWidth() { return width; }
   public int getHeight() { return height; }
   public boolean isSolid() { return solid; }

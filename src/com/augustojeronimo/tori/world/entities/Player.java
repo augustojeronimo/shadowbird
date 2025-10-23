@@ -13,9 +13,9 @@ import java.awt.image.BufferedImage;
 
 public class Player extends Entity
 {
-  private GameContext context;
+  private final GameContext context;
   private final int speed = 8, dashSpeed = 16;
-  private Camera camera;
+  private final Camera camera;
 
   private boolean up, down, left, right, dash;
 
@@ -24,13 +24,20 @@ public class Player extends Entity
   public Player(GameContext context, int worldX, int worldY) {
     super(worldX, worldY, 64, 64, true);
     this.context = context;
-
+    
     camera = new Camera(this.getXCenter(), this.getYCenter(), context.getMap());
   }
 
+  public Camera getCamera() { return camera; }
+
   @Override
-  public Hitbox getHitbox() {
+  public Hitbox getCollisionHitbox() {
     return new Hitbox(new Rectangle(width/4, height/4, width/2, height/2));
+  }
+
+  @Override
+  public Hitbox getTouchHitbox() {
+    return new Hitbox(new Rectangle(0, 0, width, height));
   }
 
   @Override
@@ -57,8 +64,6 @@ public class Player extends Entity
     GameClock.addEvent(10, () -> { this.dash = false; });
   }
 
-  public Camera getCamera() { return camera; }
-
   public KeyAction[] getKeyActions()
   {
     return new KeyAction[]{
@@ -78,40 +83,13 @@ public class Player extends Entity
     int curSpeed = dash ? dashSpeed : speed;
     if ((up || down) && (left || right)) curSpeed = (int) ((double) curSpeed / Math.sqrt(2));
 
-    int speedX;
-    int speedY;
+    int dx = 0, dy = 0;
+    if (up) dy = -curSpeed;
+    if (down) dy = curSpeed;
+    if (left) dx = -curSpeed;
+    if (right) dx = curSpeed;
 
-    if (up) { speedY = -curSpeed; }
-    else if (down) { speedY = curSpeed; }
-    else { speedY = 0; }
-
-    if (left) { speedX = -curSpeed; }
-    else if (right) { speedX = curSpeed; }
-    else { speedX = 0; }
-
-    int worldWidth = context.getMap().getWidth();
-    int worldHeight = context.getMap().getHeight();
-
-    boolean colision = false;
-
-    for (Entity e : context.getMap().getEntities()) {
-      int nextX = worldX + speedX;
-      int nextY = worldY + speedY;
-      if (this.willCollides(e, nextX, nextY)) {
-        colision = true;
-        break;
-      }
-    }
-
-    colision = (up && worldY + speedY < 0) ? true : colision;
-    colision = (down && worldY + speedY - height > worldHeight) ? true : colision;
-    colision = (left && worldX + speedX < 0) ? true : colision;
-    colision = (right && worldX + speedX - width > worldWidth) ? true : colision;
-
-    if (! colision) {
-      worldX += speedX;
-      worldY += speedY;
-    }
+    CollisionManager.move(this, dx, dy, context.getMap());
 
     if (! dash) up = down = left = right = false;
   }

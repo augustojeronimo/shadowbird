@@ -13,16 +13,16 @@ import java.util.Collections;
 import java.util.List;
 
 
-public abstract class BaseView extends UIElement
+public abstract class View extends UIElement
 {
 
-  private static final List<BaseView> list = new ArrayList<>();
+  private static final List<View> list = new ArrayList<>();
   private final ViewType type;
 
-  private static BaseView activeView;
-  protected final InputManager inputManager = new InputManager();
+  private static View activeView;
+  protected InputManager inputManager = new InputManager();
 
-  protected BaseView(ViewType type)
+  protected View(ViewType type)
   {
     this.type = type;
     addView();
@@ -42,33 +42,34 @@ public abstract class BaseView extends UIElement
       list.add(this);
 
       if (list.size() == 1) {
-        switchView(list.get(0).type);
+        switchTo(list.get(0).type);
       }
     }
   }
 
-  private void removeView(BaseView view) {
+  private void removeView(View view) {
     list.remove(view);
   }
 
-  public static List<BaseView> getViews() {
+  public static List<View> getViews() {
     return Collections.unmodifiableList(list);
   }
 
-  public static BaseView getActiveView()
+  public static View getActiveView()
   {
     return activeView;
   }
 
-  public static void switchView(ViewType type)
+  public static void switchTo(ViewType type)
   {
-    BaseView older = activeView;
+    View older = activeView;
 
-    for (BaseView view : list) {
+    for (View view : list) {
       if (view.type == type) {
         activeView = view;
       }
     }
+
     if (older != null && !older.equals(activeView)) older.setVisible(false);
     activeView.setVisible(true);
     activeView.requestFocus();
@@ -85,9 +86,12 @@ public abstract class BaseView extends UIElement
 
   protected void setDefaultKeyActions()
   {
-    // TO DO: Global KeyActions
     inputManager.addKeyAction(new KeyAction(Actions.Global::toggleFullscreen, false, KeyEvent.VK_F));
   }
 
-  protected void gainFocus() {}
+  protected void gainFocus()
+  {
+    inputManager.clearAcitions();
+    setDefaultKeyActions();
+  }
 }

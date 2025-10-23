@@ -11,19 +11,53 @@ public abstract class Entity extends GameObject
     super(worldX, worldY, width, height, solid);
   }
 
-  public Hitbox getHitbox() { return new Hitbox(); }
+  public Hitbox getCollisionHitbox() { return new Hitbox(); }
+  public Hitbox getTouchHitbox() { return new Hitbox(); }
 
-  public boolean collides(Entity other)
+  public boolean collidesWith(Entity other)
   {
-    if (other.equals(this)) return false;
-    return this.getHitbox().checkColision(other.getHitbox(), this.worldX, this.worldY, other.worldX, other.worldY);
+    if (other.equals(this) || !other.isSolid()) return false;
+
+    return this.getCollisionHitbox().checkColision(
+      other.getCollisionHitbox(),
+      this.worldX, this.worldY,
+      other.worldX, other.worldY
+    );
   }
 
-  public boolean willCollides(Entity other, int nextX, int nextY)
+  public boolean willCollideWith(Entity other, int nextX, int nextY)
+  {
+    if (other.equals(this) || !other.isSolid()) return false;
+
+    return this.getCollisionHitbox().checkColision(
+      other.getCollisionHitbox(),
+      nextX, nextY,
+      other.worldX, other.worldY
+    );
+  }
+
+  public boolean touches(Entity other)
   {
     if (other.equals(this)) return false;
-    return this.getHitbox().checkColision(other.getHitbox(), nextX, nextY, other.worldX, other.worldY);
+
+    return this.getTouchHitbox().checkColision(
+      other.getTouchHitbox(),
+      this.worldX, this.worldY,
+      other.worldX, other.worldY
+    );
   }
+
+  public boolean willTouch(Entity other, int nextX, int nextY)
+  {
+    if (other.equals(this)) return false;
+
+    return this.getTouchHitbox().checkColision(
+      other.getTouchHitbox(),
+      nextX, nextY,
+      other.worldX, other.worldY
+    );
+  }
+
 
   public class Hitbox
   {
